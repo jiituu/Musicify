@@ -1,0 +1,5 @@
+export const ADD_TO_MUSIC ='ADD_TO_MUSIC' 
+export const REMOVE_MUSIC ='REMOVE_MUSIC'
+export const GET_MUSIC ='GET_MUSIC'
+export const SET_MUSIC ='SET_MUSIC'
+export const UPDATE_MUSIC ='UPDATE_MUSIC'
