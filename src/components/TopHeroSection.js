@@ -16,6 +16,7 @@ const Wrapper = styled(Box)`
   border-bottom-left-radius: 50% 20%;
   border-bottom-right-radius: 50% 20%;
   transition: padding 0.5s, border-radius 0.5s;
+ 
 `;
 const Input = styled.input`
   margin: 0.5rem;
@@ -40,6 +41,13 @@ const Button = styled.button`
     transform: scale(1.1); 
   }
 `;
+const Input_Container =styled(Box)`
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+`
 
 const TopHeroSection = () => {
   const dispatch = useDispatch();
@@ -102,6 +110,7 @@ const TopHeroSection = () => {
         Discover, Listen, and Enjoy!
       </Text>
       <form onSubmit={handleSubmit}>
+        <Input_Container>
         <Input type='text' name='artistName'
          placeholder='Artist Name'
          value={formData.artistName}
@@ -113,6 +122,7 @@ const TopHeroSection = () => {
       <Button onClick={()=>dispatch(addToMusic())}>
         Add music 
         </Button>
+        </Input_Container>
 
 
 

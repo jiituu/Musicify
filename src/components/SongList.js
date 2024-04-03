@@ -55,6 +55,7 @@ const ButtonContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   margin-left:auto;
+  justify-content:center;
 `;
 
 
