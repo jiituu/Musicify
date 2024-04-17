@@ -8,7 +8,7 @@ export const musicData = (data = [], action) => {
       return [...action.data]
 
     case ADD_TO_MUSIC:
-      return [...data, action.data]
+      return [action.data,...data]
 
     case REMOVE_MUSIC:
       return data.filter(item => item !== action.data);

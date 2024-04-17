@@ -52,7 +52,7 @@ align-items:center;
 const TopHeroSection = () => {
   const dispatch = useDispatch();
   const [formData, setFormData]= useState({
-    artistName:'',
+    body:'',
     title:''
   })
 
@@ -63,14 +63,21 @@ const TopHeroSection = () => {
     })
   }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit= async (e)=>{
     e.preventDefault();
-    dispatch(addToMusic(formData))
+
+    if (!formData.title.trim() || !formData.body.trim()) {
+      alert('Do not send empty list as there are no empty songs.');
+      return;
+    }
+    await dispatch(addToMusic(formData.title, formData.body))
+
 
     setFormData({
-      artistName:'',
+      body:'',
       title:''
     })
+
   }
 
   
@@ -111,15 +118,15 @@ const TopHeroSection = () => {
       </Text>
       <form onSubmit={handleSubmit}>
         <Input_Container>
-        <Input type='text' name='artistName'
-         placeholder='Artist Name'
-         value={formData.artistName}
-         onChange={handleChange}/>
         <Input type='text' name='title'
-         placeholder=' Title'
+         placeholder=' Artist name'
          value={formData.title}
          onChange={handleChange}/>
-      <Button onClick={()=>dispatch(addToMusic())}>
+        <Input type='text' name='body'
+         placeholder='Title'
+         value={formData.body}
+         onChange={handleChange}/>
+      <Button type='submit'>
         Add music 
         </Button>
         </Input_Container>

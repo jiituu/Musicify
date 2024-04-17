@@ -1,7 +1,9 @@
 
-import {takeEvery,put, call} from 'redux-saga/effects'
+import {takeEvery,put, call,select } from 'redux-saga/effects'
 import { GET_MUSIC, SET_MUSIC, ADD_TO_MUSIC,UPDATE_MUSIC } from '../constant';
 import { updateMusic, } from '../action';
+import { setMusic } from '../action'; // Import action creators for SET_MUSIC and GET_MUSIC
+
 
 function* getMusic(){
 
@@ -9,34 +11,33 @@ function* getMusic(){
     
     let data = yield  fetch('https://jsonplaceholder.typicode.com/posts')
         data = yield data.json()
-        console.warn(data)
         yield put ({type:
             SET_MUSIC, 
             data})
-        console.warn("saga called")
-
 }
 function* addMusic(action) {
-    try {
+
+
+  try {
       const response = yield call(fetch, 'https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-          title: action.data.title,
-          body: action.data.body,
-          userId: 1 // You can set the userId to any value, as it's not used by JSONPlaceholder
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+          method: 'POST',
+          body: JSON.stringify({
+              title: action.data.title,
+              body: action.data.body,
+          }),
+          headers: {
+              'Content-Type': 'application/json'
+          }
       });
-      // Wait for the POST request to complete
-      yield response.json();
-      // After the POST request is successful, dispatch the action to fetch updated music
-      yield put({ type: GET_MUSIC });
-    } catch (error) {
+      const newMusic = yield response.json(); // Assuming the response contains the newly added music data
+     
+      console.log('New Music', newMusic)
+      yield put(setMusic([...(yield select(state => state.music)), newMusic])); // Append the new music to the existing music list
+  } catch (error) {
       console.error('Error adding music:', error);
-    }
   }
+}
+
 
   function* updateMusicSaga(action) {
     try {
@@ -48,7 +49,7 @@ function* addMusic(action) {
         }
       });
       yield response.json();
-      yield put({ type: GET_MUSIC });
+      yield put(getMusic());
     } catch (error) {
       console.error('Error updating music:', error);
     }

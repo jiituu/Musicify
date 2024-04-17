@@ -1,4 +1,4 @@
-import { ADD_TO_MUSIC, GET_MUSIC, REMOVE_MUSIC,UPDATE_MUSIC } from "./constant"
+import { ADD_TO_MUSIC, GET_MUSIC, REMOVE_MUSIC,UPDATE_MUSIC,SET_MUSIC } from "./constant"
 
 export const getMusic=(data)=>{
     console.warn("GET MUSIC action")
@@ -15,9 +15,17 @@ export const removeMusic=(data)=>{
 }
 
 
-export const addToMusic = (name, title) => ({
+export const setMusic = (musicData) => ({
+    type: SET_MUSIC,
+    data:musicData
+});
+
+
+
+
+export const addToMusic = (title, body) => ({
     type: ADD_TO_MUSIC,
-    data: { name, title }
+    data: {  title , body}
   });
 
   export const updateMusic = (id, newData) => ({
