@@ -8,7 +8,6 @@ Redux-Saga: Middleware utilized for asynchronous actions, particularly making ca
 Emotion and Styled System: Styling tools are used to design and style the application components.
 
 Features
-
 Display a list of songs fetched from a mock REST API ( JSONPlaceholder).
 Enable clients to perform CRUD operations on songs:
 Create new songs
